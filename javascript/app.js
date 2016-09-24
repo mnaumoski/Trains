@@ -71,5 +71,5 @@
       console.log(wait);
 
       // add each data to the table
-      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval+ '</td><td>' + empStartPretty+empMonths + '</td><td>' + empRate + '</td><td>' + empBilled + '</td></tr>');
+      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval+ '</td><td>' + startPretty + '</td><td>' + wait  + '</td></tr>');
   });
