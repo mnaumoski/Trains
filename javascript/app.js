@@ -65,13 +65,11 @@
       console.log(interval);
 
       // let's prettify
-      var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+      var startPretty = moment.unix(start).format("MM/DD/YY");
       // calculate months worked
-      var empMonths = moment().diff(moment.unix(empStart, 'X'), "months");
-      console.log(empMonths);
-      // calculate billed
-      var empBilled = empMonths * empRate;
-      console.log(empBilled);
+      var wait = moment().diff(moment.unix(start, 'X'), "months");
+      console.log(wait);
+
       // add each data to the table
-      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + empStartPretty + '</td><td>' + empMonths + '</td><td>' + empRate + '</td><td>' + empBilled + '</td></tr>');
+      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval+ '</td><td>' + empStartPretty+empMonths + '</td><td>' + empRate + '</td><td>' + empBilled + '</td></tr>');
   });
