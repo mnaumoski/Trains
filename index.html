@@ -1,11 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Train station</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Jquery ref -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <!-- Firebase ref -->
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <!-- Moment ref -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <style>
+    .jumbotron {
+        background-color: #f0e595;
+    }
+    </style>
 </head>
+
 <body>
-  
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container-flow">
+                <h1>Train Schedule - Lala station</h1>
+                <h3>Please find your travel information below</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Schedule</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover" id="trainTable">
+                            <thead>
+                                <tr>
+                                    <th>Train Line</th>
+                                    <th>Destination</th>
+                                    <th>Interval</th>
+                                    <th>Arrival</th>
+                                    <th>Wait time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- this is where the employee data input is displayed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Add Employee -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Add Train Line</strong></h3></div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="train">Train Line</label>
+                                <input type="text" class="form-control" id="train" placeholder="train line name">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="text" class="form-control" id="destination" placeholder="train destination">
+                            </div>
+                            <div class="form-group">
+                                <label for="start">Start time</label>
+                                <input type="text" class="form-control" id="start" placeholder="train leaves hub">
+                            </div>
+                            <div class="form-group">
+                                <label for="interval">Interval</label>
+                                <input type="text" class="form-control" id="interval" placeholder="train passes every">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="addTrain">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="javascript/app.js"></script>
 </body>
+
 </html>
