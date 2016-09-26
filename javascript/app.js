@@ -83,6 +83,10 @@
 
           var wait = childSnapshot.val().interval - remainder;
 
+          var waitPretty = moment.unix(wait).format("X");
+
+          console.log(waitPretty);
+
           var nextTrain = moment().add(wait, "minutes");
 
           console.log("Train Name: " + childSnapshot.val().train);
@@ -90,11 +94,11 @@
           console.log("First Train: " + childSnapshot.val().start);
           console.log("Frequency: " + childSnapshot.val().interval);
           console.log("Next Train Time: " + moment(nextTrain).format("hh:mm A"));
-          console.log("Minutes Until: " + wait);
+          console.log("Minutes Until: " + waitPretty);
           console.log("====================");
 
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval + '</td><td>' + wait + '</td><td>' + nextTrain + '</td></tr>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval + '</td><td>' + waitPretty + '</td><td>' + nextTrain + '</td></tr>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);

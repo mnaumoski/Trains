@@ -57,19 +57,19 @@
                         <form>
                             <div class="form-group">
                                 <label for="train">Train Line</label>
-                                <input type="text" class="form-control" id="train" placeholder="train line name">
+                                <input type="text" class="form-control" id="train" placeholder="train line name" required>
                             </div>
                             <div class="form-group">
                                 <label for="destination">Destination</label>
-                                <input type="text" class="form-control" id="destination" placeholder="train destination">
+                                <input type="text" class="form-control" id="destination" placeholder="train destination" required>
                             </div>
                             <div class="form-group">
                                 <label for="start">Start time</label>
-                                <input type="text" class="form-control" id="start" placeholder="train leaves hub">
+                                <input type="text" class="form-control" id="start" placeholder="train leaves hub" required>
                             </div>
                             <div class="form-group">
                                 <label for="interval">Interval</label>
-                                <input type="text" class="form-control" id="interval" placeholder="train passes every">
+                                <input type="number" class="form-control" id="interval" placeholder="train passes every" required>
                             </div>
                             <button type="submit" class="btn btn-primary" id="addTrain">Submit</button>
                         </form>
