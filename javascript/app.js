@@ -11,6 +11,16 @@
   var database = firebase.database();
 
   console.log("test");
+  // var current = moment().format('MMMM Do YYYY, h:mm:ss a');
+  // $("#current").html(current);
+
+  function update() {
+      $('#current').html(moment().format('D. MMMM YYYY H:mm:ss'));
+  }
+  setInterval(update, 1000);
+
+
+
   // Initialize Firebase
   // 2. Button for adding Employees
   $("#addTrain").on("click", function() {
@@ -71,5 +81,5 @@
       console.log(wait);
 
       // add each data to the table
-      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval+ '</td><td>' + startPretty + '</td><td>' + wait  + '</td></tr>');
+      $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval + '</td><td>' + startPretty + '</td><td>' + wait + '</td></tr>');
   });
