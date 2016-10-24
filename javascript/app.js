@@ -82,23 +82,18 @@
           console.log("Time converted from UNIX: " + prettyInterval);
           console.log("unix interval time: "+ interval);
 
+          var diffTime = moment().diff(moment(prettyStart), "minutes");
+          console.log("unix time difference " + diffTime);
 
+          var prettyDiff = moment.unix(diffTime).format("mm");
+          console.log("Normal time converted from unix time is " + prettyDiff);
 
+          var remainder = diffTime % prettyDiff;
 
+          console.log("unix time remainder " + remainder);
 
-          var startMoment = moment(childSnapshot.val().start, "mm").subtract(1, "years");
-          console.log(startMoment);
-          var diffTime = moment().diff(moment(startMoment), "minutes");
-
-          var remainder = diffTime % childSnapshot.val().interval;
-
-          var wait = childSnapshot.val().interval - remainder;
-
-          var waitPretty = moment.unix(wait).format("X");
-
-
-
-          // unixTimestamp*1000
+          var wait = prettyInterval - remainder;
+          console.log("wait time is: " + wait);
 
           // var nextTrain = moment().add(wait, "minutes");
 
@@ -111,7 +106,7 @@
           // console.log("====================");
 
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval +" minutes"+ '</td><td>' + waitPretty + '</td><td>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval +" minutes"+ '</td><td>' + '</ts><td>'+ wait + '</td><td>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);
