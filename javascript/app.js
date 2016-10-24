@@ -12,10 +12,10 @@
       // database
       var database = firebase.database();
       // train
-      var train = "";
-      var destination = "";
-      var start = "";
-      var interval = 0;
+      // var train = "";
+      // var destination = "";
+      // var start = "";
+      // var interval = 0;
       // show the current running time
       function update() {
           $('#current').html(moment().format('D. MMMM YYYY H:mm:ss'));
@@ -25,12 +25,14 @@
       $("#addTrain").on("submit", function() {
 
           // grab inputs
-          train = $("#train").val().trim();
-          destination = $("#destination").val().trim();
-          start = $("#start").val().trim();
-          interval = $("#interval").val().trim();
+          var train = $("#train").val().trim();
+          var destination = $("#destination").val().trim();
+          // format in unix time
+          var firstTrainUnix = moment($("#start").val().trim(), "HH:mm").subtract(10, "years").format("X");
+          // var start = $("#start").val().trim();
+          var interval = $("#interval").val().trim();
 
-
+          // local object for holding the data
           var newTrain = {
               train: train,
               destination: destination,
@@ -71,12 +73,21 @@
           // console log printing
           console.log(train);
           console.log(destination);
-          console.log(start);
-          console.log(interval);
+
+          var prettyStart = moment.unix(start).format("YYYY-MM-DD HH:mm");
+          var prettyInterval = moment.unix(interval).format("YYYY-MM-DD HH:mm");
+
+          console.log("Time converted from UNIX: " + prettyStart);
+          console.log("unix start time: " + start);
+          console.log("Time converted from UNIX: " + prettyInterval);
+          console.log("unix interval time: "+ interval);
+
+
+
 
 
           var startMoment = moment(childSnapshot.val().start, "hh:mm").subtract(1, "years");
-
+          console.log(startMoment);
           var diffTime = moment().diff(moment(startMoment), "minutes");
 
           var remainder = diffTime % childSnapshot.val().interval;
@@ -85,20 +96,22 @@
 
           var waitPretty = moment.unix(wait).format("X");
 
-          console.log(waitPretty);
 
-          var nextTrain = moment().add(wait, "minutes");
 
-          console.log("Train Name: " + childSnapshot.val().train);
-          console.log("Destination: " + childSnapshot.val().destination);
-          console.log("First Train: " + childSnapshot.val().start);
-          console.log("Frequency: " + childSnapshot.val().interval);
-          console.log("Next Train Time: " + moment(nextTrain).format("hh:mm A"));
-          console.log("Minutes Until: " + waitPretty);
-          console.log("====================");
+          // unixTimestamp*1000
+
+          // var nextTrain = moment().add(wait, "minutes");
+
+          // console.log("Train Name: " + childSnapshot.val().train);
+          // console.log("Destination: " + childSnapshot.val().destination);
+          // console.log("First Train: " + childSnapshot.val().start);
+          // console.log("Frequency: " + moment.unix(childSnapshot.val().interval).format("X");
+          // console.log("Next Train Time: " + moment(nextTrain).format("hh:mm A"));
+          // console.log("Minutes Until: " + waitPretty);
+          // console.log("====================");
 
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + interval + '</td><td>' + waitPretty + '</td><td>' + nextTrain + '</td></tr>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + waitPretty + '</td><td>' + waitPretty + '</td><td>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);
