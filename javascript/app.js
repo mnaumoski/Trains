@@ -77,10 +77,16 @@
           var prettyStart = moment.unix(start).format("YYYY-MM-DD HH:mm");
           var prettyInterval = moment.unix(interval).format("mm");
 
+          var nextTrainUnix = parseInt(start) + parseInt(interval);
+          console.log("unix next train " + nextTrainUnix);
+
+          var nextPretty = moment.unix(nextTrainUnix).format("HH:mm");
+          console.log("Next train is coming: (min)" + nextPretty)
+
           console.log("Time converted from UNIX: " + prettyStart);
           console.log("unix start time: " + start);
           console.log("Time converted from UNIX: " + prettyInterval);
-          console.log("unix interval time: "+ interval);
+          console.log("unix interval time: " + interval);
 
           var diffTime = moment().diff(moment(prettyStart), "minutes");
           console.log("unix time difference " + diffTime);
@@ -92,29 +98,15 @@
 
           console.log("unix time remainder " + remainder);
 
-          var wait = prettyInterval - remainder;
+          var wait = remainder - prettyInterval;
           console.log("wait time is: " + wait);
 
-          // var nextTrain = moment().add(wait, "minutes");
-
-          // console.log("Train Name: " + childSnapshot.val().train);
-          // console.log("Destination: " + childSnapshot.val().destination);
-          // console.log("First Train: " + childSnapshot.val().start);
-          // console.log("Frequency: " + moment.unix(childSnapshot.val().interval).format("X");
-          // console.log("Next Train Time: " + moment(nextTrain).format("hh:mm A"));
-          // console.log("Minutes Until: " + waitPretty);
-          // console.log("====================");
 
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval +" minutes"+ '</td><td>' + '</ts><td>'+ wait + '</td><td>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval + " minutes" + '</td><td>' + nextPretty+ '</ts><td>' + wait + '</td><td>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);
 
       });
-
-
   });
-  // wait time is the time difference between current time and arrival time
-  // current time is already running in html
-  //arrival time is the start time plus interval time
