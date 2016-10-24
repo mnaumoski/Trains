@@ -11,11 +11,7 @@
       // inital varibles
       // database
       var database = firebase.database();
-      // train
-      // var train = "";
-      // var destination = "";
-      // var start = "";
-      // var interval = 0;
+
       // show the current running time
       function update() {
           $('#current').html(moment().format('D. MMMM YYYY H:mm:ss'));
@@ -74,39 +70,51 @@
           console.log(train);
           console.log(destination);
 
+          var differenceTimes = moment().diff(moment.unix(start), "minutes");
+          console.log("difference: " + differenceTimes);
+
+          var tRemainder = differenceTimes % interval;
+          console.log("the remainder: " + tRemainder);
+
+          var tMinutes = interval - tRemainder;
+          console.log("train minutes: " + tMinutes);
+
+          var tArrival = moment().add(tMinutes, "m").format("hh:mm A");
+          console.log("Arrival" + tArrival);
+
           var prettyStart = moment.unix(start).format("YYYY-MM-DD HH:mm");
           var prettyInterval = moment.unix(interval).format("mm");
 
-          var nextTrainUnix = parseInt(start) + parseInt(interval);
-          console.log("unix next train " + nextTrainUnix);
+          // var nextTrainUnix = parseInt(start) + parseInt(interval);
+          // console.log("unix next train " + nextTrainUnix);
 
-          var nextPretty = moment.unix(nextTrainUnix).format("HH:mm");
-          console.log("Next train is coming: (min)" + nextPretty)
+          // var nextPretty = moment.unix(nextTrainUnix).format("HH:mm");
+          // console.log("Next train is coming: (min)" + nextPretty)
 
-          console.log("Time converted from UNIX: " + prettyStart);
-          console.log("unix start time: " + start);
-          console.log("Time converted from UNIX: " + prettyInterval);
-          console.log("unix interval time: " + interval);
+          // console.log("Time converted from UNIX: " + prettyStart);
+          // console.log("unix start time: " + start);
+          // console.log("Time converted from UNIX: " + prettyInterval);
+          // console.log("unix interval time: " + interval);
 
-          var diffTime = moment().diff(moment(prettyStart), "minutes");
-          console.log("unix time difference " + diffTime);
+          // // var diffTime = moment().diff(moment(prettyStart), "minutes");
+          // console.log("unix time difference " + diffTime);
 
-          var prettyDiff = moment.unix(diffTime).format("mm");
-          console.log("Normal time converted from unix time is " + prettyDiff);
+          // var prettyDiff = moment.unix(diffTime).format("mm");
+          // console.log("Normal time converted from unix time is " + prettyDiff);
 
-          var remainder = diffTime % prettyDiff;
+          // var remainder = diffTime % prettyDiff;
 
-          console.log("unix time remainder " + remainder);
+          // console.log("unix time remainder " + remainder);
 
-          var wait = remainder - prettyInterval;
+          var wait = moment.unix(tMinutes).format("HH:mm");
           console.log("wait time is: " + wait);
 
-
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval + " minutes" + '</td><td>' + nextPretty+ '</ts><td>' + wait + '</td><td>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval + " minutes" + '</td><td>' + tArrival + '</td><td id="up">' +wait+ " minutes" + '</td><td>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);
 
       });
+
   });
