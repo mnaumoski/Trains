@@ -75,7 +75,7 @@
           console.log(destination);
 
           var prettyStart = moment.unix(start).format("YYYY-MM-DD HH:mm");
-          var prettyInterval = moment.unix(interval).format("YYYY-MM-DD HH:mm");
+          var prettyInterval = moment.unix(interval).format("mm");
 
           console.log("Time converted from UNIX: " + prettyStart);
           console.log("unix start time: " + start);
@@ -86,7 +86,7 @@
 
 
 
-          var startMoment = moment(childSnapshot.val().start, "hh:mm").subtract(1, "years");
+          var startMoment = moment(childSnapshot.val().start, "mm").subtract(1, "years");
           console.log(startMoment);
           var diffTime = moment().diff(moment(startMoment), "minutes");
 
@@ -111,7 +111,7 @@
           // console.log("====================");
 
           // add each data to the table
-          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + waitPretty + '</td><td>' + waitPretty + '</td><td>');
+          $("#trainTable > tbody").append('<tr><td>' + train + '</td><td>' + destination + '</td><td>' + prettyInterval +" minutes"+ '</td><td>' + waitPretty + '</td><td>');
       }, function(errorObject) {
 
           console.log("The read failed: " + errorObject.code);
